@@ -89,8 +89,20 @@ def home():
         </div>
         """, unsafe_allow_html=True)
         
-        df_sentiment = pd.read_csv(r"D:/Lead Walnut/analysis_results11.csv")
+                # Function to load CSV files from the Data folder
+        def load_csv_data(folder_name="Data"):
+            data_dict = {}
+            for file_name in os.listdir(folder_name):
+                if file_name.endswith(".csv"):
+                    file_path = os.path.join(folder_name, file_name)
+                    df = pd.read_csv(file_path)
+                    data_dict[file_name] = df
+            return data_dict
 
+        # Load all CSV files
+        data_dict = load_csv_data()
+        df_sentiment = data_dict.get("analysis_results11.csv")
+    
         # Select key columns for analysis
         sentiment_columns = ['POSITIVE SCORE', 'NEGATIVE SCORE', 'POLARITY SCORE', 
                             'SUBJECTIVITY SCORE', 'FOG INDEX', 'AVG SENTENCE LENGTH',
