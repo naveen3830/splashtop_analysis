@@ -1,0 +1,7 @@
+nltk
+plotly
+seaborn
+streamlit
+matplotlib
+pandas
+streamlit_option_menu
