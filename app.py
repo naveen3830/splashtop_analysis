@@ -9,7 +9,6 @@ from home import home
 from competitor import competitor
 from issues import issues
 
-
 st.set_page_config(
     page_title="Splashtop Content Analysis",
     page_icon=":books:",
@@ -38,34 +37,47 @@ st.markdown("""
             box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
+        .sidebar .sidebar-content {
+            background-color: #f8f9fa;
+        }
+        .sidebar .sidebar-content .stMarkdown {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #e9ecef;
+            margin-bottom: 10px;
+        }
     </style>
     """, unsafe_allow_html=True)
-# Initialize session state for the DataFrame
-if 'df' not in st.session_state:
-    st.session_state.df = None
 
-# Sidebar menu
 with st.sidebar:
-    # Title with centered alignment
-    st.markdown("<h2 style='text-align: center;'>Menu</h2>", unsafe_allow_html=True)
-
-    # Subtitle with centered alignment
-    st.markdown("<h4 style='text-align: center;'>Navigate through the sections:</h4>", unsafe_allow_html=True)
-    
+    st.markdown("<h2 style='text-align: center;'>Splashtop Content Analysis</h2>", unsafe_allow_html=True)
+    st.divider()
     selected = option_menu(
-        'Main Menu',
+        'Navigation',
         ['Home', 'Competitor Analysis', 'Issues Analysis'],
         icons=['house', 'bar-chart-line', 'list-check'],
         default_index=0,
         menu_icon="cast"
     )
+    st.divider()    
+    st.markdown("""
+    <div class='info-box'>
+        <p>This application provides in-depth analysis of Splashtop content, including:</p>
+        <ul>
+            <li>Competitor analysis</li>
+            <li>Issues tracking</li>
+            <li>Content performance metrics</li>
+        </ul>
+        <p>Navigate through different sections to explore various aspects of the analysis.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
 
 if selected == "Home":
     home()
-
+    
 elif selected == "Competitor Analysis":
     competitor()
-
+    
 elif selected == "Issues Analysis":
     issues()
-
