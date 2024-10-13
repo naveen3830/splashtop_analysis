@@ -3,8 +3,36 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objs as go
 import os
+from pathlib import Path
+from plotly.subplots import make_subplots
 
 def home():
+    def load_data(folder_name="Data"):
+        data_dict = {}
+        for file_name in os.listdir(folder_name):
+            file_path = os.path.join(folder_name, file_name)
+            try:
+                # Try reading as CSV first
+                df = pd.read_csv(file_path, on_bad_lines='skip')
+                data_dict[file_name] = df
+            except pd.errors.ParserError:
+                try:
+                    # If CSV fails, try reading as Excel
+                    df = pd.read_excel(file_path)
+                    data_dict[file_name] = df
+                except Exception as e:
+                    # If both fail, read as text and create a DataFrame
+                    with open(file_path, 'r') as file:
+                        content = file.read()
+                    df = pd.DataFrame({'content': [content]})
+                    data_dict[file_name] = df
+            except Exception as e:
+                st.error(f"Error loading {file_name}: {str(e)}")
+        return data_dict
+
+    # Load all data files
+    data_dict = load_data()
+        
     def splashtop_content():
         st.header("Splashtop Content Analysis", divider='rainbow')
         
@@ -90,20 +118,9 @@ def home():
         </div>
         """, unsafe_allow_html=True)
         
-                # Function to load CSV files from the Data folder
-        def load_csv_data(folder_name="Data"):
-            data_dict = {}
-            for file_name in os.listdir(folder_name):
-                if file_name.endswith(".csv"):
-                    file_path = os.path.join(folder_name, file_name)
-                    df = pd.read_csv(file_path)
-                    data_dict[file_name] = df
-            return data_dict
 
-        # Load all CSV files
-        data_dict = load_csv_data()
         df_sentiment = data_dict.get("analysis_results11.csv")
-    
+        
         # Select key columns for analysis
         sentiment_columns = ['POSITIVE SCORE', 'NEGATIVE SCORE', 'POLARITY SCORE', 
                             'SUBJECTIVITY SCORE', 'FOG INDEX', 'AVG SENTENCE LENGTH',
@@ -213,15 +230,17 @@ def home():
             
         st.divider()
 
+
+
     def anydesk_content():
         st.header("AnyDesk Content Analysis", divider='rainbow')
-        
+
         st.markdown("""
             <div class='intro'>
                 <p>This page provides an in-depth analysis of <b>AnyDesk's</b> content, a major competitor to <b>Splashtop</b>, with a focus on <b>Remote Access</b> and related topics.</p>
             </div>
         """, unsafe_allow_html=True)
-        
+
         st.markdown("""
             <div style="text-align: center;">
                 <img src="https://img.swapcard.com/?u=https%3A%2F%2Fcdn-api.swapcard.com%2Fpublic%2Fimages%2Fbac2e0339ab54511aaf8e3f7fe1e6269.png&q=0.8&m=fit&w=400&h=200" width="300">
@@ -230,7 +249,6 @@ def home():
         st.divider()
 
         col1, col2 = st.columns([1.9, 1.2])
-        
 
         with col1:
             st.markdown("""
@@ -268,7 +286,7 @@ def home():
             """, unsafe_allow_html=True)
 
         st.divider()
-        
+
         st.markdown("""
         <h3 class='header'>Keyword Frequency Treemap</h3>
         This treemap visualizes the frequency of the keywords related to "Remote Access" found across AnyDesk’s pages:
@@ -282,18 +300,18 @@ def home():
             paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
             plot_bgcolor='rgba(0,0,0,0)'    # Transparent plot background
         )
-        st.plotly_chart(fig_anydesk)
-        
+        st.plotly_chart(fig_anydesk, key="treemap_chart")
+
         st.divider()
         st.header("Sentiment Analysis Results", divider='rainbow')
-        
+
         st.markdown("""
         <div class='intro'>
             <p>This section provides a comprehensive analysis of sentiment scores and readability for the URLs analyzed. Below are the key metrics such as positive, negative, and polarity scores, as well as readability metrics like the Fog Index.</p>
         </div>
         """, unsafe_allow_html=True)
-        
-        df_sentiment = pd.read_csv(r"D:/Lead Walnut/analysis_results12.csv")
+
+        df_sentiment = data_dict.get("analysis_results12.csv")
 
         # Select key columns for analysis
         sentiment_columns = ['POSITIVE SCORE', 'NEGATIVE SCORE', 'POLARITY SCORE', 
@@ -302,8 +320,7 @@ def home():
 
         # Further Insights on other metrics like Word Count, Personal Pronouns
         col7, col8 = st.columns([1.9, 1.1])
-        # Create columns for graphs and insights
-        
+
         with col7:
             st.markdown("""
         <h3 class='header'>Sentiment Score Overview</h3>
@@ -318,9 +335,11 @@ def home():
                 - On average, the content has a strong positive sentiment (mean polarity score of 0.9745) and moderate complexity (average FOG index of 14.5885).
                 - The average word count is 982.9725 words per item, with significant variation (from 4 to 9,051 words).
                 """)
-        st.divider()   
-            
+
+        st.divider()
+
         col1, col2 = st.columns([1.9, 1.1])
+
         with col1:
             st.markdown("<h3>Positive vs Negative Sentiment</h3>", unsafe_allow_html=True)
             fig_sentiment = go.Figure()
@@ -338,10 +357,9 @@ def home():
                 paper_bgcolor='rgba(0,0,0,0)',
                 font=dict(color='#d2d2d6')
             )
-            st.plotly_chart(fig_sentiment)
+            st.plotly_chart(fig_sentiment, key="sentiment_bar_chart")
 
         with col2:
-            # Insights for Positive vs Negative Sentiment
             st.markdown("<h3>Insights</h3>", unsafe_allow_html=True)
             st.write("""
             - **Positive Content**: URLs with higher positive sentiment scores indicate user-friendly content, which can improve dwell time and user engagement.
@@ -354,7 +372,6 @@ def home():
         col3, col4 = st.columns([1.9, 1.1])
 
         with col3:
-            # Readability Metrics (Graph)
             st.markdown("<h3>Readability Metrics</h3>", unsafe_allow_html=True)
             fig_readability = go.Figure()
             fig_readability.add_trace(go.Scatter(x=df_sentiment['URL_ID'], y=df_sentiment['FOG INDEX'], 
@@ -370,10 +387,9 @@ def home():
                 paper_bgcolor='rgba(0,0,0,0)',
                 font=dict(color='#d2d2d6')
             )
-            st.plotly_chart(fig_readability)
+            st.plotly_chart(fig_readability, key="readability_chart")
 
         with col4:
-            # Insights for Readability Metrics
             st.markdown("<h3>Insights</h3>", unsafe_allow_html=True)
             st.write("""
             - **Fog Index**: High Fog Index indicates complex content. For SEO, simpler, easy-to-read content can rank better, especially for broader audiences.
@@ -383,7 +399,6 @@ def home():
 
         st.divider()
 
-        # Further Insights on other metrics like Word Count, Personal Pronouns
         col5, col6 = st.columns([1.9, 1.1])
 
         with col5:
@@ -394,7 +409,7 @@ def home():
                 paper_bgcolor='rgba(0,0,0,0)',
                 font=dict(color='#d2d2d6')
             )
-            st.plotly_chart(fig_word_count)
+            st.plotly_chart(fig_word_count, key="word_count_histogram")
 
         with col6:
             st.markdown("<h3>Insights</h3>", unsafe_allow_html=True)
@@ -402,9 +417,9 @@ def home():
             - **Word Count**: Longer articles tend to perform better in search engines. If the content is too short, it may not fully satisfy user intent.
             - **Action**: We need to ensure that high-priority URLs have adequate word counts to match the competition, especially for more competitive keywords.
             """)
-            
+
         st.divider()
-            
+
     def comparison():
         st.header("Splashtop vs AnyDesk: A Content Comparison",divider='rainbow')
 
