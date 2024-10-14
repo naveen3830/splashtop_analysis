@@ -11,9 +11,6 @@
   <li><strong>Data/</strong><br>
   Directory that contains the datasets used for the analysis, such as scraped text data from Splashtop and its competitors.</li>
   
-  <li><strong>__pycache__/</strong><br>
-  Cached Python files generated during execution.</li>
-  
   <li><strong>jupyter_notebooks/</strong><br>
   Contains the Jupyter notebooks used for initial data exploration and analysis before integration into the Streamlit app.</li>
   
