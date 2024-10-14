@@ -1,5 +1,5 @@
 <h1>Splashtop Content Analysis Web Application</h1>
-🌐 **Website**: [Splashtop Content Analysis](https://splashtopanalysis.streamlit.app/)
+<p>🌐 <strong>Website</strong>: <a href="https://splashtopanalysis.streamlit.app/">Splashtop Content Analysis Web App</a></p>
 
 <hr>
 <p>ℹ️ This repository contains the code for a web application that analyzes content coverage around the phrase "Remote Access" for the website <a href="https://www.splashtop.com">www.splashtop.com</a>. It includes analysis of keyword variations, competitor content, and identification of gaps using Python, Streamlit, and data analysis libraries.</p>
