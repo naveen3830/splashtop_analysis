@@ -1,65 +1,48 @@
-<h1>Splashtop Content Analysis</h1>
+<h1>Splashtop Content Analysis Web Application</h1>
 
-<p>This repository contains the code and analysis for the project focused on content coverage around the phrase "Remote Access" for the website <a href="https://www.splashtop.com">www.splashtop.com</a>. The goal is to analyze keyword variations, identify gaps in competitor content, and provide insights using data analysis and visualization techniques.</p>
-
-<h2>Project Structure</h2>
+<p>🌐 <strong>Website</strong>: <a href="https://splashtopanalysis.streamlit.app/">Splashtop Content Analysis Web App</a></p>
+<hr>
+<p>ℹ️ This repository contains the code for a web application that analyzes content coverage around the phrase "Remote Access" for the website <a href="https://www.splashtop.com">www.splashtop.com</a>. It includes analysis of keyword variations, competitor content, and identification of gaps using Python, Streamlit, and data analysis libraries.</p>
 
 <ul>
-  <li><strong>.streamlit/</strong><br>
-  Contains the configuration files for the Streamlit app, including theming and layout settings.</li>
-  
-  <li><strong>Data/</strong><br>
-  Directory that contains the datasets used for the analysis, such as scraped text data from Splashtop and its competitors.</li>
-  
-  <li><strong>jupyter_notebooks/</strong><br>
-  Contains the Jupyter notebooks used for initial data exploration and analysis before integration into the Streamlit app.</li>
-  
-  <li><strong>app.py</strong><br>
-  The main file that runs the Streamlit application.</li>
-  
-  <li><strong>competitor.py</strong><br>
-  Script for analyzing competitor content and identifying gaps in keyword usage.</li>
-  
-  <li><strong>home.py</strong><br>
-  Defines the home page of the Streamlit app, displaying an overview of the analysis.</li>
-  
-  <li><strong>issues.py</strong><br>
-  Contains code to analyze and display potential content issues or missing keyword opportunities.</li>
-  
-  <li><strong>requirements.txt</strong><br>
-  A list of dependencies and libraries required to run the project, including Screaming Frog, Python, Streamlit, Plotly, and other data analysis tools.</li>
+  <li><strong>Data</strong>: Contains datasets used for content analysis, including scraped data from Splashtop and competitor websites.</li>
+  <li><strong>app.py</strong>: Main Python script that runs the Streamlit web application.</li>
+  <li><strong>competitor.py</strong>: Script to analyze competitors and their content gaps.</li>
+  <li><strong>home.py</strong>: Defines the home page layout and introduction for the analysis.</li>
+  <li><strong>issues.py</strong>: Code to identify potential issues or missing keywords in the content.</li>
+  <li><strong>requirements.txt</strong>: Lists the required Python packages to run the web application.</li>
+  <li><strong>README.md</strong>: You’re reading it right now! Provides information about the project and its files.</li>
 </ul>
 
-<h2>How to Run</h2>
+<hr>
 
+<h2>🚀 Getting Started</h2>
 <ol>
-  <li>Clone the repository:
-    <pre><code>git clone https://github.com/naveen3830/splashtop_analysis.git</code></pre>
-  </li>
-  
-  <li>Install the required dependencies:
-    <pre><code>pip install -r requirements.txt</code></pre>
-  </li>
-  
-  <li>Run the Streamlit application:
-    <pre><code>streamlit run app.py</code></pre>
-  </li>
+  <li>Clone this repository: <pre><code>git clone https://github.com/naveen3830/splashtop_analysis</code></pre></li>
+  <li>Install the required packages: <pre><code>pip install -r requirements.txt</code></pre></li>
+  <li>Run the web application: <pre><code>streamlit run app.py</code></pre></li>
 </ol>
 
-<h2>Tools and Libraries</h2>
+<hr>
 
+<h2>🔗 Links</h2>
 <ul>
-  <li><strong>Screaming Frog</strong>: For scraping content from Splashtop and its competitors.</li>
-  <li><strong>Python</strong>: Used for scripting and data analysis.</li>
-  <li><strong>Streamlit</strong>: For building the interactive web application.</li>
-  <li><strong>Plotly</strong>: For creating visualizations.</li>
-  <li><strong>Data analysis libraries</strong>: Includes libraries like Pandas and Numpy for data manipulation.</li>
+  <li><a href="https://streamlit.io/">Streamlit</a>: Framework used for building and deploying the web application.</li>
+  <li><a href="https://plotly.com/">Plotly</a>: Visualization library used for creating interactive charts and graphs.</li>
+  <li><a href="https://www.screamingfrog.co.uk/">Screaming Frog</a>: Tool used for scraping content from Splashtop and competitors.</li>
 </ul>
 
-<h2>Deployment</h2>
+<hr>
 
-<p>The application is deployed and accessible on Streamlit Cloud at <a href="https://splashtopanalysis.streamlit.app/">https://splashtopanalysis.streamlit.app/</a>.</p>
+<h2>📝 Note</h2>
+<ul>
+  <li>Feel free to explore and analyze the content data or adjust the scripts for custom analysis.</li>
+  <li>You can replace or add new datasets in the <strong>Data</strong> directory to extend the analysis.</li>
+</ul>
 
-<h2>Contact</h2>
+<hr>
 
-<p>For any questions or suggestions, please feel free to contact me.</p>
+<h2>📧 Contact</h2>
+<p>For any inquiries or feedback, please contact: <a href="mailto:naveenr3830@gmail.com">naveenr3830@gmail.com</a></p>
+
+<hr>
