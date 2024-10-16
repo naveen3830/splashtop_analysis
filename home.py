@@ -38,7 +38,7 @@ def home():
         
         st.markdown("""
         <div class='intro'>
-            <p>Welcome to the <b>Splashtop Content Analysis</b> web app! This application is designed to analyze the content coverage of Splashtop's website around the phrase <b>“Remote Access”</b> and its related keywords.</p>
+            <p>Welcome to the <b>Splashtop Content Analysis</b> web app! This web application is designed to analyze the content coverage of Splashtop's website around the phrase <b>“Remote Access”</b> and its related keywords.</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -51,7 +51,7 @@ def home():
                 <ol>
                     <li><b>Data Collection</b>: I used Screaming Frog application to crawl Splashtop's website and collect all page URLs.</li>
                     <li><b>Content Extraction</b>: Beautiful Soup was employed to extract textual data from each page.</li>
-                    <li><b>Keyword Analysis</b>:I have analyzed the frequency of "Remote Access" and related keywords across all the extracted pages.</li>
+                    <li><b>Keyword Analysis</b>: I have analyzed the frequency of "Remote Access" and related keywords across all the extracted pages.</li>
                 </ol>
             </div>
             """, unsafe_allow_html=True)
