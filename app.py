@@ -72,7 +72,6 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-
 if selected == "Home":
     home()
     

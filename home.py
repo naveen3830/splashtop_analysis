@@ -114,14 +114,11 @@ def home():
         </div>
         """, unsafe_allow_html=True)
         df_sentiment = data_dict.get("analysis_results11.csv")
-        
-        # Select key columns for analysis
         sentiment_columns = ['POSITIVE SCORE', 'NEGATIVE SCORE', 'POLARITY SCORE', 
                             'SUBJECTIVITY SCORE', 'FOG INDEX', 'AVG SENTENCE LENGTH',
                             'WORD COUNT', 'SYLLABLE PER WORD', 'PERSONAL PRONOUNS']
 
         col7, col8 = st.columns([1.9, 1.1])
-        
         with col7:
             st.markdown("""
         <h3 class='header'>Sentiment Score Overview</h3>
@@ -171,7 +168,6 @@ def home():
         st.divider()
 
         col3, col4 = st.columns([1.9, 1.1])
-
         with col3:
             # Readability Metrics (Graph)
             st.markdown("<h3>Readability Metrics</h3>", unsafe_allow_html=True)
@@ -202,9 +198,7 @@ def home():
 
         st.divider()
 
-        # Further Insights on other metrics like Word Count, Personal Pronouns
         col5, col6 = st.columns([1.9, 1.1])
-
         with col5:
             st.markdown("<h3>Word Count Distribution</h3>", unsafe_allow_html=True)
             fig_word_count = px.histogram(df_sentiment, x='WORD COUNT', nbins=20, title='Word Count Distribution')
@@ -224,8 +218,6 @@ def home():
             
         st.divider()
 
-
-
     def anydesk_content():
         st.header("AnyDesk Content Analysis", divider='rainbow')
 
@@ -243,7 +235,6 @@ def home():
         st.divider()
 
         col1, col2 = st.columns([1.9, 1.2])
-
         with col1:
             st.markdown("""
             <h3 class='header'>Keyword Frequency Analysis</h3>
@@ -306,15 +297,11 @@ def home():
         """, unsafe_allow_html=True)
 
         df_sentiment = data_dict.get("analysis_results12.csv")
-
-        # Select key columns for analysis
         sentiment_columns = ['POSITIVE SCORE', 'NEGATIVE SCORE', 'POLARITY SCORE', 
                             'SUBJECTIVITY SCORE', 'FOG INDEX', 'AVG SENTENCE LENGTH',
                             'WORD COUNT', 'SYLLABLE PER WORD', 'PERSONAL PRONOUNS']
 
-        # Further Insights on other metrics like Word Count, Personal Pronouns
         col7, col8 = st.columns([1.9, 1.1])
-
         with col7:
             st.markdown("""
         <h3 class='header'>Sentiment Score Overview</h3>
@@ -333,7 +320,6 @@ def home():
         st.divider()
 
         col1, col2 = st.columns([1.9, 1.1])
-
         with col1:
             st.markdown("<h3>Positive vs Negative Sentiment</h3>", unsafe_allow_html=True)
             fig_sentiment = go.Figure()
@@ -364,7 +350,6 @@ def home():
         st.divider()
 
         col3, col4 = st.columns([1.9, 1.1])
-
         with col3:
             st.markdown("<h3>Readability Metrics</h3>", unsafe_allow_html=True)
             fig_readability = go.Figure()
@@ -394,7 +379,6 @@ def home():
         st.divider()
 
         col5, col6 = st.columns([1.9, 1.1])
-
         with col5:
             st.markdown("<h3>Word Count Distribution</h3>", unsafe_allow_html=True)
             fig_word_count = px.histogram(df_sentiment, x='WORD COUNT', nbins=20, title='Word Count Distribution')
@@ -444,8 +428,7 @@ def home():
             'remote control software': 5
         }
         
-        col1, col2 = st.columns([1.3, 1.7])
-        
+        col1, col2 = st.columns([1.3, 1.7])       
         with col1:
             st.markdown("<h3>Keyword Frequency Table</h3>", unsafe_allow_html=True)
             df_keywords = pd.DataFrame({
