@@ -71,7 +71,10 @@ with st.sidebar:
         <p>Navigate through different sections to explore various aspects of the analysis.</p>
     </div>
     """, unsafe_allow_html=True)
-    
+    st.markdown(
+        '<h4>Made in &nbsp<img src="https://streamlit.io/images/brand/streamlit-mark-color.png" alt="Streamlit logo" height="16">&nbsp by <a href="https://github.com/naveen3830"> @Naveen</a></h4>',
+            unsafe_allow_html=True,
+        )
 if selected == "Home":
     home()
     

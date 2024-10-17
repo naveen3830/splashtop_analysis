@@ -85,7 +85,7 @@ def home():
             
             <p><b>Recommendations:</b></p>
             <ul>
-                <li>Consider optimizing content for underused but relevant phrases like <b>"virtual access"</b> to cover more areas related to remote access solutions.</li>
+                <li>We must consider optimizing content for underused but relevant phrases like <b>"virtual access"</b> to cover more areas related to remote access solutions.</li>
             </ul>
             """, unsafe_allow_html=True)
 
@@ -96,8 +96,9 @@ def home():
         This treemap visualizes the frequency of the keywords related to "Remote Access" found across Splashtop’s pages:
         """, unsafe_allow_html=True)
 
-        fig_splashtop = px.treemap(df_splashtop, values='frequency', path=['keyword'], hover_data=['keyword', 'frequency'],
-                                hover_name='keyword')
+        fig_splashtop = px.treemap(df_splashtop, values='frequency', path=['keyword'], 
+                                hover_data={'keyword': False, 'frequency': True})
+        fig_splashtop.update_traces(hovertemplate='<b>Keyword:</b> %{label}<br><b>Frequency:</b> %{value}<extra></extra>')
         fig_splashtop.update_layout(
             font_size=15,
             margin=dict(l=10, r=10, t=50, b=10),
@@ -113,10 +114,15 @@ def home():
             <p>This section provides a comprehensive analysis of sentiment scores and readability for the URLs analyzed. Below are the key metrics such as positive, negative, and polarity scores, as well as readability metrics like the Fog Index.</p>
         </div>
         """, unsafe_allow_html=True)
+        
+        
         df_sentiment = data_dict.get("analysis_results11.csv")
         sentiment_columns = ['POSITIVE SCORE', 'NEGATIVE SCORE', 'POLARITY SCORE', 
                             'SUBJECTIVITY SCORE', 'FOG INDEX', 'AVG SENTENCE LENGTH',
                             'WORD COUNT', 'SYLLABLE PER WORD', 'PERSONAL PRONOUNS']
+        
+        with st.expander("Click to view the dataset"):
+            st.dataframe(df_sentiment, use_container_width=True)
 
         col7, col8 = st.columns([1.9, 1.1])
         with col7:
@@ -130,7 +136,7 @@ def home():
             st.markdown("<h3>Insights</h3>", unsafe_allow_html=True)
             st.write(""" 
                 - **Content length:** The average word count of 772 words suggests substantial content, which search engines often favor. Longer, in-depth content tends to rank better for informational queries.
-                - **Readability:** The average FOG index of 18.0393 indicates fairly complex text. For SEO, you might consider simplifying some content to improve readability and user engagement, as search engines value user experience.
+                - **Readability:** The average FOG index of 18.0393 indicates fairly complex text. For SEO, we must consider simplifying some content to improve readability and user engagement, as search engines value user experience.
                 - **Sentiment analysis:** The positive sentiment (average polarity score of 0.9549) can be beneficial, as positive content often resonates better with readers and may lead to higher engagement and sharing rates.
                 """)
         st.divider()   
@@ -140,9 +146,9 @@ def home():
             # Positive vs Negative Scores (Graph)
             st.markdown("<h3>Positive vs Negative Sentiment</h3>", unsafe_allow_html=True)
             fig_sentiment = go.Figure()
-            fig_sentiment.add_trace(go.Bar(x=df_sentiment['URL_ID'], y=df_sentiment['POSITIVE SCORE'], 
+            fig_sentiment.add_trace(go.Line(x=df_sentiment['URL_ID'], y=df_sentiment['POSITIVE SCORE'], 
                                         name='Positive Score', marker_color='lightgreen'))
-            fig_sentiment.add_trace(go.Bar(x=df_sentiment['URL_ID'], y=df_sentiment['NEGATIVE SCORE'], 
+            fig_sentiment.add_trace(go.Line(x=df_sentiment['URL_ID'], y=df_sentiment['NEGATIVE SCORE'], 
                                         name='Negative Score', marker_color='salmon'))
 
             fig_sentiment.update_layout(
@@ -157,7 +163,6 @@ def home():
             st.plotly_chart(fig_sentiment)
 
         with col2:
-            # Insights for Positive vs Negative Sentiment
             st.markdown("<h3>Insights</h3>", unsafe_allow_html=True)
             st.write("""
             - **Positive Content**: URLs with higher positive sentiment scores indicate user-friendly content, which can improve dwell time and user engagement.
@@ -169,7 +174,6 @@ def home():
 
         col3, col4 = st.columns([1.9, 1.1])
         with col3:
-            # Readability Metrics (Graph)
             st.markdown("<h3>Readability Metrics</h3>", unsafe_allow_html=True)
             fig_readability = go.Figure()
             fig_readability.add_trace(go.Scatter(x=df_sentiment['URL_ID'], y=df_sentiment['FOG INDEX'], 
@@ -205,7 +209,8 @@ def home():
             fig_word_count.update_layout(
                 plot_bgcolor='rgba(0,0,0,0)',
                 paper_bgcolor='rgba(0,0,0,0)',
-                font=dict(color='#d2d2d6'))
+                font=dict(color='#d2d2d6'),
+                bargap=0.1 )
             
             st.plotly_chart(fig_word_count)
 
@@ -263,11 +268,7 @@ def home():
                 <li><b>"Remote desktop"</b> and <b>"remote access"</b> are also significant, with 403 and 354 mentions, respectively.</li>
                 <li>Some keywords, such as <b>"virtual access"</b> and <b>"virtual desktop connection"</b>, have 0 occurrences, indicating a gap in coverage.</li>
             </ul>
-            
-            <p><b>Recommendations:</b></p>
-            <ul>
-                <li>Consider enhancing content for secure remote access and expanding coverage on "virtual access".</li>
-            </ul>
+
             """, unsafe_allow_html=True)
 
         st.divider()
@@ -300,6 +301,9 @@ def home():
         sentiment_columns = ['POSITIVE SCORE', 'NEGATIVE SCORE', 'POLARITY SCORE', 
                             'SUBJECTIVITY SCORE', 'FOG INDEX', 'AVG SENTENCE LENGTH',
                             'WORD COUNT', 'SYLLABLE PER WORD', 'PERSONAL PRONOUNS']
+        
+        with st.expander("Click to view the dataset"):
+            st.dataframe(df_sentiment, use_container_width=True)
 
         col7, col8 = st.columns([1.9, 1.1])
         with col7:
@@ -323,9 +327,9 @@ def home():
         with col1:
             st.markdown("<h3>Positive vs Negative Sentiment</h3>", unsafe_allow_html=True)
             fig_sentiment = go.Figure()
-            fig_sentiment.add_trace(go.Bar(x=df_sentiment['URL_ID'], y=df_sentiment['POSITIVE SCORE'], 
+            fig_sentiment.add_trace(go.Line(x=df_sentiment['URL_ID'], y=df_sentiment['POSITIVE SCORE'], 
                                         name='Positive Score', marker_color='lightgreen'))
-            fig_sentiment.add_trace(go.Bar(x=df_sentiment['URL_ID'], y=df_sentiment['NEGATIVE SCORE'], 
+            fig_sentiment.add_trace(go.Line(x=df_sentiment['URL_ID'], y=df_sentiment['NEGATIVE SCORE'], 
                                         name='Negative Score', marker_color='salmon'))
 
             fig_sentiment.update_layout(
@@ -344,7 +348,6 @@ def home():
             st.write("""
             - **Positive Content**: URLs with higher positive sentiment scores indicate user-friendly content, which can improve dwell time and user engagement.
             - **Negative Sentiment**: High negative sentiment could indicate that content needs revisiting, especially if it's critical pages like product descriptions or landing pages.
-            - **Action**: We must consider rephrasing or enhancing content on URLs with high negative sentiment to improve user experience and SEO ranking.
             """)
 
         st.divider()
@@ -373,7 +376,7 @@ def home():
             st.write("""
             - **Fog Index**: High Fog Index indicates complex content. For SEO, simpler, easy-to-read content can rank better, especially for broader audiences.
             - **Avg Sentence Length**: Shorter sentences improve readability. Aim for a balance between brevity and clarity.
-            - **Action**: We must focus on simplifying content with high Fog Index scores to improve user retention and SEO rankings.
+
             """)
 
         st.divider()
@@ -385,15 +388,14 @@ def home():
             fig_word_count.update_layout(
                 plot_bgcolor='rgba(0,0,0,0)',
                 paper_bgcolor='rgba(0,0,0,0)',
-                font=dict(color='#d2d2d6')
-            )
+                font=dict(color='#d2d2d6'),
+                bargap=0.1)
             st.plotly_chart(fig_word_count, key="word_count_histogram")
 
         with col6:
             st.markdown("<h3>Insights</h3>", unsafe_allow_html=True)
             st.write("""
             - **Word Count**: Longer articles tend to perform better in search engines. If the content is too short, it may not fully satisfy user intent.
-            - **Action**: We need to ensure that high-priority URLs have adequate word counts to match the competition, especially for more competitive keywords.
             """)
 
         st.divider()
@@ -401,7 +403,6 @@ def home():
     def comparison():
         st.header("Splashtop vs AnyDesk: A Content Comparison",divider='rainbow')
 
-        # Mock data for keyword frequencies (replace these with actual data)
         splashtop_keywords = {
             'remote access': 614,
             'remote desktop': 487,
