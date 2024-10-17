@@ -12,16 +12,13 @@ def home():
         for file_name in os.listdir(folder_name):
             file_path = os.path.join(folder_name, file_name)
             try:
-                # Try reading as CSV first
                 df = pd.read_csv(file_path, on_bad_lines='skip')
                 data_dict[file_name] = df
             except pd.errors.ParserError:
                 try:
-                    # If CSV fails, try reading as Excel
                     df = pd.read_excel(file_path)
                     data_dict[file_name] = df
                 except Exception as e:
-                    # If both fail, read as text and create a DataFrame
                     with open(file_path, 'r') as file:
                         content = file.read()
                     df = pd.DataFrame({'content': [content]})
@@ -30,7 +27,6 @@ def home():
                 st.error(f"Error loading {file_name}: {str(e)}")
         return data_dict
 
-    # Load all data files
     data_dict = load_data()
         
     def splashtop_content():
@@ -55,28 +51,29 @@ def home():
                 </ol>
             </div>
             """, unsafe_allow_html=True)
-
+            
+        with col2:
+            st.image("https://www.splashtop.com/splashtop-logo-large.png", width=300)
+            
+        st.divider()
+        
+        col7, col8 = st.columns([1.9, 1.2])
+        with col7:
             st.markdown("""
             <h3 class='header'>Keyword Frequency Analysis</h3>
             <p>Below is a summary of the keyword frequency analysis, showing how often each keyword or phrase appears across the pages:</p>
             """, unsafe_allow_html=True)
-
-            # Splashtop Keyword Data
-            splashtop_data = {
-                'keyword': [
-                    'remote access', 'remote desktop', 'virtual access', 'remote control',
-                    'remote', 'remote desktop software', 'remote access solutions',
-                    'virtual desktop connection', 'secure remote access', 'remote control software'
-                ],
-                'frequency': [614, 487, 0, 65, 4045, 62, 52, 0, 57, 1]
-            }
             
+            splashtop_data = {
+                    'keyword': ['remote access', 'remote desktop', 'virtual access', 'remote control',
+                        'remote', 'remote desktop software', 'remote access solutions',
+                        'virtual desktop connection', 'secure remote access', 'remote control software'],
+                    'frequency': [614, 487, 0, 65, 4045, 62, 52, 0, 57, 1]}
+                
             df_splashtop = pd.DataFrame(splashtop_data)
             st.dataframe(df_splashtop, use_container_width=True)
-
-        with col2:
-            st.image("https://www.splashtop.com/splashtop-logo-large.png", width=300)
             
+        with col8:
             st.markdown("""
             <h3 class='header'>Analysis</h3>
             <p><b>Key Insights:</b></p>
@@ -104,11 +101,10 @@ def home():
         fig_splashtop.update_layout(
             font_size=15,
             margin=dict(l=10, r=10, t=50, b=10),
-            paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
-            plot_bgcolor='rgba(0,0,0,0)'    # Transparent plot background
+            paper_bgcolor='rgba(0,0,0,0)',  
+            plot_bgcolor='rgba(0,0,0,0)'   
         )
         st.plotly_chart(fig_splashtop)
-        st.divider()
     
         st.header("Sentiment Analysis Results", divider='rainbow')
         
@@ -117,8 +113,6 @@ def home():
             <p>This section provides a comprehensive analysis of sentiment scores and readability for the URLs analyzed. Below are the key metrics such as positive, negative, and polarity scores, as well as readability metrics like the Fog Index.</p>
         </div>
         """, unsafe_allow_html=True)
-        
-
         df_sentiment = data_dict.get("analysis_results11.csv")
         
         # Select key columns for analysis

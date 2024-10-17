@@ -11,7 +11,7 @@ from issues import issues
 
 st.set_page_config(
     page_title="Splashtop Content Analysis",
-    page_icon=":books:",
+    page_icon=":chart:",
     layout="wide"
 )
 
@@ -29,7 +29,7 @@ st.markdown("""
             color: #003f5c;
             font-weight: bold;
             margin-bottom: 20px;
-        }
+        } 
         .info-box {
             background-color: #ffffff;
             padding: 20px;
@@ -64,9 +64,9 @@ with st.sidebar:
     <div class='info-box'>
         <p>This application provides in-depth analysis of Splashtop content, including:</p>
         <ul>
+            <li>Content analysis</li>
             <li>Competitor analysis</li>
             <li>Issues tracking</li>
-            <li>Content performance metrics</li>
         </ul>
         <p>Navigate through different sections to explore various aspects of the analysis.</p>
     </div>
