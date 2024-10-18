@@ -278,15 +278,16 @@ def home():
         This treemap visualizes the frequency of the keywords related to "Remote Access" found across AnyDesk’s pages:
         """, unsafe_allow_html=True)
 
-        fig_anydesk = px.treemap(df_anydesk, values='frequency', path=['keyword'], hover_data=['keyword', 'frequency'],
-                                hover_name='keyword')
-        fig_anydesk.update_layout(
+        fig_splashtop = px.treemap(df_anydesk, values='frequency', path=['keyword'], 
+                                hover_data={'keyword': False, 'frequency': True})
+        fig_splashtop.update_traces(hovertemplate='<b>Keyword:</b> %{label}<br><b>Frequency:</b> %{value}<extra></extra>')
+        fig_splashtop.update_layout(
             font_size=15,
             margin=dict(l=10, r=10, t=50, b=10),
-            paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
-            plot_bgcolor='rgba(0,0,0,0)'    # Transparent plot background
+            paper_bgcolor='rgba(0,0,0,0)',  
+            plot_bgcolor='rgba(0,0,0,0)'   
         )
-        st.plotly_chart(fig_anydesk, key="treemap_chart")
+        st.plotly_chart(fig_splashtop)
 
         st.divider()
         st.header("Sentiment Analysis Results", divider='rainbow')
@@ -455,8 +456,6 @@ def home():
         """)
 
         st.divider()
-
-        # Content Metrics Comparison (add your metrics data here)
         splashtop_metrics = {
             'Word Count': 25000,
             'Fog Index': 18.04,

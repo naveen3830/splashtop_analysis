@@ -41,8 +41,6 @@
 </ul>
 
 <hr>
-
 <h2>📧 Contact</h2>
 <p>For any inquiries or feedback, please contact: <a href="mailto:naveenr3830@gmail.com">naveenr3830@gmail.com</a></p>
-
 <hr>
