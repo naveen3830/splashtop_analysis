@@ -60,8 +60,7 @@ def competitor():
         </div>
     """, unsafe_allow_html=True)
 
-    data = {
-        'Keyword': ['remote desktop', 'remote pc', 'go to my pc', 'teamviewer remote control', 'remote pc login', 
+    data = {'Keyword': ['remote desktop', 'remote pc', 'go to my pc', 'teamviewer remote control', 'remote pc login', 
                     'remotepc login', 'remote desktop software', 'remote desktop programs', 'teamviewer free', 
                     'windows remote desktop'],
         'Intent': ['NT', 'I', 'NT', 'N', 'NT', 'NT', 'C', 'I', 'IT', 'I'],
@@ -74,6 +73,7 @@ def competitor():
         'CPC': [3.68, 3.34, 9.94, 6.45, 1.01, 1.01, 4.66, 4.66, 2.50, 3.90],
         'Competition': [0.1, 0.08, 0.2, 0.24, 0.11, 0.11, 0.26, 0.26, 0.19, 0.11]
     }
+
     df = pd.DataFrame(data)
     
     def create_styled_figure(fig):
@@ -100,6 +100,8 @@ def competitor():
                 hover_data=['Volume', 'KD%', 'CPC'])
     fig1.update_layout(yaxis_title='Ranking Position (Lower is Better)')
     fig1 = create_styled_figure(fig1)
+    with st.expander("Click to view the dataset"):
+        st.dataframe(df)
     st.plotly_chart(fig1, use_container_width=True)
     
     st.markdown("<h1 style='text-align: center;'>Keyword Difficulty vs. Search Volume</h1><hr style='border: 2px solid rainbow; border-radius: 5px;'>", unsafe_allow_html=True)
@@ -159,7 +161,6 @@ def competitor():
     fig6.add_trace(go.Scatter(x=df['KD%'], y=df['Volume'], mode='markers', 
                             text=df['Keyword'], name='Keywords'), row=1, col=2)
 
-    # CPC vs. Competition
     fig6.add_trace(go.Scatter(x=df['Competition'], y=df['CPC'], mode='markers', 
                             text=df['Keyword'], name='Keywords'), row=2, col=1)
     fig6.add_trace(go.Bar(x=intent_counts['Intent'], y=intent_counts['Count'], name='Intent'), row=2, col=2)
