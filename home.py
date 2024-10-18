@@ -457,13 +457,13 @@ def home():
 
         st.divider()
         splashtop_metrics = {
-            'Word Count': 25000,
+            'Word Count': 772.4,
             'Fog Index': 18.04,
             'Reading Time (min)': 15
         }
         
         anydesk_metrics = {
-            'Word Count': 20000,
+            'Word Count': 982.9 ,
             'Fog Index': 14.25,
             'Reading Time (min)': 12
         }
