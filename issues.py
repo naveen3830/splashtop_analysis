@@ -27,24 +27,21 @@ def issues():
     data_dict = load_data()
     
     st.markdown("<h1 style='text-align: center;'>SEO Issues Overview Dashboard</h1><hr style='border: 2px solid rainbow; border-radius: 5px;'>", unsafe_allow_html=True)
-    st.markdown("""
-    ### Data Overview
+    st.markdown("""### Data Overview
     This dashboard provides an analysis of SEO issues extracted from Screaming Frog. 
     The data represents various issues identified for different URLs from the Splashtop website, including their types, priorities, and the percentage contribution to the total SEO issues. 
     Each plot below helps to visualize different aspects of the data.
     """)
 
     df = data_dict.get("issues_overview_report.csv")
-    st.markdown(
-        """
+    st.markdown("""
         <style>
         h1 { text-align: center; }
         .plotly-graph-div {
             background-color: transparent !important;
         }
         </style>
-        """, unsafe_allow_html=True
-    )
+        """, unsafe_allow_html=True)
 
     st.subheader("SEO Issues Data Overview",divider='rainbow')
     st.write("The table below shows the data used for the analysis.")
@@ -52,16 +49,13 @@ def issues():
     st.divider()
 
     st.subheader("Distribution of Issue Types",divider='rainbow')
-    st.write("""
-    This pie chart shows the distribution of different issue types across the dataset. 
-    Each slice represents the proportion of a specific issue type in relation to the total number of issues identified.
-    """)
+    st.write("""This pie chart shows the distribution of different issue types across the dataset. 
+    Each slice represents the proportion of a specific issue type in relation to the total number of issues identified.""")
 
     issue_type_counts = df['Issue Type'].value_counts().reset_index()
     issue_type_counts.columns = ['Issue Type', 'Count']
 
-    fig1 = px.pie(issue_type_counts, values='Count', names='Issue Type', 
-                title='Distribution of Issue Types')
+    fig1 = px.pie(issue_type_counts, values='Count', names='Issue Type', title='Distribution of Issue Types')
     fig1.update_traces(marker=dict(line=dict(color='#000000', width=1)))
     fig1.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
 
@@ -69,15 +63,12 @@ def issues():
     st.divider()
 
     st.subheader("Distribution of Issue Priority",divider='rainbow')
-    st.write("""
-    This pie chart provides insight into how SEO issues are prioritized. 
-    It helps to understand the proportion of high, medium, and low priority issues that need attention.
-    """)
+    st.write("""This pie chart provides insight into how SEO issues are prioritized. 
+    It helps to understand the proportion of high, medium, and low priority issues that need attention.""")
 
     issue_priority = df['Issue Priority'].value_counts().reset_index()
     issue_priority.columns = ['Issue Priority', 'Count']
-    fig2 = px.pie(issue_priority, values='Count', names='Issue Priority', 
-                title='Distribution of Issue Priority')
+    fig2 = px.pie(issue_priority, values='Count', names='Issue Priority',title='Distribution of Issue Priority')
     fig2.update_traces(marker=dict(line=dict(color='#000000', width=1)))
     fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
 
@@ -101,13 +92,11 @@ def issues():
     st.plotly_chart(fig3, use_container_width=True)
     st.divider()
     st.subheader("Sunburst Chart of SEO Issues",divider='rainbow')
-    st.write("""
-    This sunburst chart visualizes a hierarchical breakdown of the issues, starting from the issue type, 
+    st.write("""This sunburst chart visualizes a hierarchical breakdown of the issues, starting from the issue type, 
     then the priority level, and finally the specific issue name. It offers a layered view of how different types of issues are distributed.
     """)
 
-    fig4 = px.sunburst(df, 
-                    path=['Issue Type', 'Issue Priority', 'Issue Name'], 
+    fig4 = px.sunburst(df,path=['Issue Type', 'Issue Priority', 'Issue Name'], 
                     values='% of Total',
                     title='Sunburst Chart of SEO Issues')
     fig4.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
